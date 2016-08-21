@@ -14,11 +14,11 @@ import javax.swing.SwingConstants;
  * A panel that implements the Scrollable interface. This class allows you to
  * customize the scrollable features by using newly provided setter methods so
  * you don't have to extend this class every time.
- * 
+ *
  * Scrollable amounts can be specifed as a percentage of the viewport size or as
  * an actual pixel value. The amount can be changed for both unit and block
  * scrolling for both horizontal and vertical scrollbars.
- * 
+ *
  * The Scrollable interface only provides a boolean value for determining
  * whether or not the viewport size (width or height) should be used by the
  * scrollpane when determining if scrollbars should be made visible. This class
@@ -64,17 +64,10 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
     NONE, FIT, STRETCH;
   }
 
-  private static final long serialVersionUID = 5045389161307904568L;
-
-  protected static int getScrollableIncrement(final IncrementInfo inInfo, final int inDistance) {
-    if (inInfo.getIncrement() == IncrementType.PIXELS) {
-      return inInfo.getAmount();
-    }
-
-    return (inDistance * inInfo.getAmount()) / 100;
-  }
+  private static final long  serialVersionUID = 5045389161307904568L;
 
   private ScrollableSizeHint scrollableHeight = ScrollableSizeHint.NONE;
+
   private ScrollableSizeHint scrollableWidth  = ScrollableSizeHint.NONE;
   private IncrementInfo      horizontalBlock;
   private IncrementInfo      horizontalUnit;
@@ -90,7 +83,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Constuctor for specifying the LayoutManager of the panel.
-   * 
+   *
    * @param layout
    *          the LayountManger for the panel
    */
@@ -106,6 +99,14 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
     setScrollableUnitIncrement(VERTICAL, unit);
   }
 
+  protected static int getScrollableIncrement(final IncrementInfo inInfo, final int inDistance) {
+    if (inInfo.getIncrement() == IncrementType.PIXELS) {
+      return inInfo.getAmount();
+    }
+
+    return (inDistance * inInfo.getAmount()) / 100;
+  }
+
   @Override
   public Dimension getPreferredScrollableViewportSize() {
     return getPreferredSize();
@@ -113,9 +114,9 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Get the block IncrementInfo for the specified orientation
-   * 
+   *
    * @param inOrientation
-   * 
+   *
    * @return the block IncrementInfo for the specified orientation
    */
   public IncrementInfo getScrollableBlockIncrement(final int inOrientation) {
@@ -136,7 +137,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Get the height ScrollableSizeHint enum
-   * 
+   *
    * @return the ScrollableSizeHint enum for the height
    */
   public ScrollableSizeHint getScrollableHeight() {
@@ -183,9 +184,9 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Get the unit IncrementInfo for the specified orientation
-   * 
+   *
    * @param inOrientation
-   * 
+   *
    * @return the unit IncrementInfo for the specified orientation
    */
   public IncrementInfo getScrollableUnitIncrement(final int inOrientation) {
@@ -208,7 +209,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Get the width ScrollableSizeHint enum
-   * 
+   *
    * @return the ScrollableSizeHint enum for the width
    */
   public ScrollableSizeHint getScrollableWidth() {
@@ -217,7 +218,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Specify the information needed to do block scrolling.
-   * 
+   *
    * @param orientation
    *          specify the scrolling orientation. Must be either:
    *          SwingContants.HORIZONTAL or SwingContants.VERTICAL.
@@ -240,7 +241,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Specify the information needed to do block scrolling.
-   * 
+   *
    * @param inOrientation
    *          specify the scrolling orientation. Must be either:
    *          SwingContants.HORIZONTAL or SwingContants.VERTICAL.
@@ -262,13 +263,13 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
    * Set the ScrollableSizeHint enum for the height. The enum is used to
    * determine the boolean value that is returned by the
    * getScrollableTracksViewportHeight() method. The valid values are:
-   * 
+   *
    * ScrollableSizeHint.NONE - return "false", which causes the height of the
    * panel to be used when laying out the children ScrollableSizeHint.FIT -
    * return "true", which causes the height of the viewport to be used when
    * laying out the children ScrollableSizeHint.STRETCH - return "true" when the
    * viewport height is greater than the height of the panel, "false" otherwise.
-   * 
+   *
    * @param inScrollableHeight
    *          as represented by the ScrollableSizeHint enum.
    */
@@ -279,7 +280,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Specify the information needed to do unit scrolling.
-   * 
+   *
    * @param orientation
    *          specify the scrolling orientation. Must be either:
    *          SwingContants.HORIZONTAL or SwingContants.VERTICAL.
@@ -302,7 +303,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
   /**
    * Specify the information needed to do unit scrolling.
-   * 
+   *
    * @param inOrientation
    *          specify the scrolling orientation. Must be either:
    *          SwingContants.HORIZONTAL or SwingContants.VERTICAL.
@@ -324,13 +325,13 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
    * Set the ScrollableSizeHint enum for the width. The enum is used to
    * determine the boolean value that is returned by the
    * getScrollableTracksViewportWidth() method. The valid values are:
-   * 
+   *
    * ScrollableSizeHint.NONE - return "false", which causes the width of the
    * panel to be used when laying out the children ScrollableSizeHint.FIT -
    * return "true", which causes the width of the viewport to be used when
    * laying out the children ScrollableSizeHint.STRETCH - return "true" when the
    * viewport width is greater than the width of the panel, "false" otherwise.
-   * 
+   *
    * @param inScrollableWidth
    *          as represented by the ScrollableSizeHint enum.
    */

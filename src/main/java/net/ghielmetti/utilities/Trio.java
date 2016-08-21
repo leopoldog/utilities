@@ -5,9 +5,9 @@ import java.io.Serializable;
 /**
  * Allow the creation of a three object group that can be used at will and added
  * to Hashtables.
- * 
+ *
  * @author Leopoldo Ghielmetti
- * 
+ *
  * @param <Left>
  *          The left parameter class
  * @param <Center>
@@ -30,7 +30,7 @@ public class Trio<Left, Center, Right> implements Serializable {
   /**
    * Create a new object. You must specify a "left", a "center" and a "right"
    * object.
-   * 
+   *
    * @param inLeft
    *          The left object
    * @param inCenter
@@ -89,7 +89,7 @@ public class Trio<Left, Center, Right> implements Serializable {
 
   /**
    * Return the center object
-   * 
+   *
    * @return The object
    */
   public Center getCenter() {
@@ -98,7 +98,7 @@ public class Trio<Left, Center, Right> implements Serializable {
 
   /**
    * Return the left object
-   * 
+   *
    * @return The object
    */
   public Left getLeft() {
@@ -107,7 +107,7 @@ public class Trio<Left, Center, Right> implements Serializable {
 
   /**
    * Return the right object
-   * 
+   *
    * @return The object
    */
   public Right getRight() {
@@ -141,7 +141,7 @@ public class Trio<Left, Center, Right> implements Serializable {
 
   /**
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#toString()
    */
   @Override

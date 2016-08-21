@@ -3,14 +3,21 @@ package net.ghielmetti.utilities;
 /**
  * A utility class that can contains about everything that has no place
  * elsewhere.
- * 
+ *
  * @author Leopoldo Ghielmetti
  */
 public final class Tools {
   /**
+   * An empty constructor.
+   */
+  private Tools() {
+    // nothing to do
+  }
+
+  /**
    * Check if two objects are equals. Same as the *.equals method but works also
    * if one or both objects are null.
-   * 
+   *
    * @param inObject1
    *          The first object to check
    * @param inObject2
@@ -24,12 +31,5 @@ public final class Tools {
     }
 
     return ((inObject1 != null) && inObject1.equals(inObject2));
-  }
-
-  /**
-   * An empty constructor.
-   */
-  private Tools() {
-    // nothing to do
   }
 }

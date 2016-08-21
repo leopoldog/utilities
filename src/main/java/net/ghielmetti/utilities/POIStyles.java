@@ -11,9 +11,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * Classe contenant les styles pour les feuilles Excel
- * 
+ *
  * @author Leopoldo Ghielmetti
- * 
+ *
  */
 public class POIStyles {
   private Workbook               workBook;
@@ -58,7 +58,7 @@ public class POIStyles {
    * Thin border.
    * </dl>
    * </dl>
-   * 
+   *
    * @param inStyle
    *          The style format string
    * @return The Style object for the POI Cells

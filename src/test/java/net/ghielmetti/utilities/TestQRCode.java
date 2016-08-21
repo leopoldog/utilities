@@ -4,10 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
-
-import org.junit.Test;
 
 public class TestQRCode {
   @SuppressWarnings("static-method")
