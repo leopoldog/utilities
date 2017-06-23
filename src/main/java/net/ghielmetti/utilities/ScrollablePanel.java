@@ -13,12 +13,12 @@ import javax.swing.SwingConstants;
 /**
  * A panel that implements the Scrollable interface. This class allows you to
  * customize the scrollable features by using newly provided setter methods so
- * you don't have to extend this class every time.
- *
+ * you don't have to extend this class every time.<br>
+ * <br>
  * Scrollable amounts can be specifed as a percentage of the viewport size or as
  * an actual pixel value. The amount can be changed for both unit and block
- * scrolling for both horizontal and vertical scrollbars.
- *
+ * scrolling for both horizontal and vertical scrollbars.<br>
+ * <br>
  * The Scrollable interface only provides a boolean value for determining
  * whether or not the viewport size (width or height) should be used by the
  * scrollpane when determining if scrollbars should be made visible. This class
@@ -116,7 +116,6 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
    * Get the block IncrementInfo for the specified orientation
    *
    * @param inOrientation
-   *
    * @return the block IncrementInfo for the specified orientation
    */
   public IncrementInfo getScrollableBlockIncrement(final int inOrientation) {
@@ -186,7 +185,6 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
    * Get the unit IncrementInfo for the specified orientation
    *
    * @param inOrientation
-   *
    * @return the unit IncrementInfo for the specified orientation
    */
   public IncrementInfo getScrollableUnitIncrement(final int inOrientation) {
@@ -263,7 +261,6 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
    * Set the ScrollableSizeHint enum for the height. The enum is used to
    * determine the boolean value that is returned by the
    * getScrollableTracksViewportHeight() method. The valid values are:
-   *
    * ScrollableSizeHint.NONE - return "false", which causes the height of the
    * panel to be used when laying out the children ScrollableSizeHint.FIT -
    * return "true", which causes the height of the viewport to be used when
@@ -325,7 +322,6 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
    * Set the ScrollableSizeHint enum for the width. The enum is used to
    * determine the boolean value that is returned by the
    * getScrollableTracksViewportWidth() method. The valid values are:
-   *
    * ScrollableSizeHint.NONE - return "false", which causes the width of the
    * panel to be used when laying out the children ScrollableSizeHint.FIT -
    * return "true", which causes the width of the viewport to be used when

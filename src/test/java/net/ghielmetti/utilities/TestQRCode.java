@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import net.glxn.qrgen.QRCode;
-import net.glxn.qrgen.image.ImageType;
+import net.glxn.qrgen.core.image.ImageType;
+import net.glxn.qrgen.javase.QRCode;
 
 public class TestQRCode {
   @SuppressWarnings("static-method")

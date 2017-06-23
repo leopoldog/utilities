@@ -7,7 +7,6 @@ import java.io.Serializable;
  * Hashtables.
  *
  * @author Leopoldo Ghielmetti
- *
  * @param <Left>
  *          The left parameter class
  * @param <Right>
