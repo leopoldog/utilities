@@ -1,7 +1,5 @@
 package net.ghielmetti.utilities;
 
-import java.io.Serializable;
-
 /**
  * Allow the creation of a three object group that can be used at will and added to Hashtables.
  *
@@ -9,18 +7,16 @@ import java.io.Serializable;
  * @param <Left> The left parameter class
  * @param <Center> The center parameter class
  * @param <Right> The right parameter class
+ * @deprecated Use org.apache.commons.lang3.tuple.ImmutableTriple from commons-lang3 instead.
  */
-public class Trio<Left, Center, Right> implements Serializable {
-  private static final long serialVersionUID = -5170715597299150616L;
+@Deprecated
+public class Trio<Left, Center, Right> {
+  private static final int PRIME = 31;
 
-  private static final int  PRIME            = 31;
-
-  /*
-   * The three values
-   */
-  private final Left        left;
-  private final Center      center;
-  private final Right       right;
+  // The three values
+  private final Left       left;
+  private final Center     center;
+  private final Right      right;
 
   /**
    * Create a new object. You must specify a "left", a "center" and a "right" object.
@@ -79,7 +75,7 @@ public class Trio<Left, Center, Right> implements Serializable {
   }
 
   /**
-   * Return the center object
+   * Returns the center object
    *
    * @return The object
    */
@@ -88,7 +84,7 @@ public class Trio<Left, Center, Right> implements Serializable {
   }
 
   /**
-   * Return the left object
+   * Returns the left object
    *
    * @return The object
    */
@@ -97,7 +93,7 @@ public class Trio<Left, Center, Right> implements Serializable {
   }
 
   /**
-   * Return the right object
+   * Returns the right object
    *
    * @return The object
    */
@@ -130,11 +126,6 @@ public class Trio<Left, Center, Right> implements Serializable {
     return result;
   }
 
-  /**
-   * (non-Javadoc)
-   *
-   * @see java.lang.Object#toString()
-   */
   @Override
   public String toString() {
     return "(" + left + "," + center + "," + right + ")";

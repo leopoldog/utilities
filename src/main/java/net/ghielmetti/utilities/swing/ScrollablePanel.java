@@ -1,4 +1,4 @@
-package net.ghielmetti.utilities;
+package net.ghielmetti.utilities.swing;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,24 +23,44 @@ import javax.swing.SwingConstants;
  * only be used when it is larger than the panels size. This has the effect of ensuring the viewport is always full as
  * components added to the panel will be size to fill the area available, based on the rules of the applicable layout
  * manager of course.
+ *
+ * @author Leopoldo Ghielmetti
  */
 public class ScrollablePanel extends JPanel implements Scrollable, SwingConstants {
   /**
    * Helper class to hold the information required to calculate the scroll amount.
+   *
+   * @author Leopoldo Ghielmetti
    */
   public static class IncrementInfo {
     private IncrementType type;
     private int           amount;
 
+    /**
+     * Defines an increment information.
+     *
+     * @param inType type on increment {@link IncrementType#PERCENT} or {@link IncrementType#PIXELS}.
+     * @param inAmount amount of the increment.
+     */
     public IncrementInfo(final IncrementType inType, final int inAmount) {
       type = inType;
       amount = inAmount;
     }
 
+    /**
+     * Getter for the amount.
+     *
+     * @return the amount.
+     */
     public int getAmount() {
       return amount;
     }
 
+    /**
+     * Getter for the increment.
+     *
+     * @return the increment.
+     */
     public IncrementType getIncrement() {
       return type;
     }
@@ -51,23 +71,41 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
     }
   }
 
+  /**
+   * Type of increment.
+   *
+   * @author Leopoldo Ghielmetti
+   */
   public enum IncrementType {
-    PERCENT, PIXELS;
+    /** The increment is defined as a percent of the full size. */
+    PERCENT,
+    /** The increment is defined in pixels. */
+    PIXELS;
   }
 
+  /**
+   * How to define the size of the scrollable area.
+   *
+   * @author Leopoldo Ghielmetti
+   */
   public enum ScrollableSizeHint {
-    NONE, FIT, STRETCH;
+    /***/
+    NONE,
+    /***/
+    FIT,
+    /***/
+    STRETCH;
   }
 
-  private static final long  serialVersionUID = 5045389161307904568L;
+  private static final String INVALID_ORIENTATION = "Invalid orientation: ";
+  private static final long   serialVersionUID    = 5045389161307904568L;
 
-  private ScrollableSizeHint scrollableHeight = ScrollableSizeHint.NONE;
-
-  private ScrollableSizeHint scrollableWidth  = ScrollableSizeHint.NONE;
-  private IncrementInfo      horizontalBlock;
-  private IncrementInfo      horizontalUnit;
-  private IncrementInfo      verticalBlock;
-  private IncrementInfo      verticalUnit;
+  private ScrollableSizeHint  scrollableHeight    = ScrollableSizeHint.NONE;
+  private ScrollableSizeHint  scrollableWidth     = ScrollableSizeHint.NONE;
+  private IncrementInfo       horizontalBlock;
+  private IncrementInfo       horizontalUnit;
+  private IncrementInfo       verticalBlock;
+  private IncrementInfo       verticalUnit;
 
   /**
    * Default constructor that uses a FlowLayout
@@ -77,7 +115,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
   }
 
   /**
-   * Constuctor for specifying the LayoutManager of the panel.
+   * Constructor for specifying the LayoutManager of the panel.
    *
    * @param layout the LayountManger for the panel
    */
@@ -93,6 +131,13 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
     setScrollableUnitIncrement(VERTICAL, unit);
   }
 
+  /**
+   * Returns the increment value.
+   *
+   * @param inInfo The increment informations.
+   * @param inDistance The distance to scroll.
+   * @return The increment.
+   */
   protected static int getScrollableIncrement(final IncrementInfo inInfo, final int inDistance) {
     if (inInfo.getIncrement() == IncrementType.PIXELS) {
       return inInfo.getAmount();
@@ -124,7 +169,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
       case SwingConstants.VERTICAL:
         return getScrollableIncrement(verticalBlock, visible.height);
       default:
-        throw new IllegalArgumentException("Invalid orientation: " + orientation);
+        throw new IllegalArgumentException(INVALID_ORIENTATION + orientation);
     }
   }
 
@@ -193,7 +238,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
       case SwingConstants.VERTICAL:
         return getScrollableIncrement(verticalUnit, visible.height);
       default:
-        throw new IllegalArgumentException("Invalid orientation: " + orientation);
+        throw new IllegalArgumentException(INVALID_ORIENTATION + orientation);
     }
   }
 
@@ -224,7 +269,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
         verticalBlock = info;
         break;
       default:
-        throw new IllegalArgumentException("Invalid orientation: " + orientation);
+        throw new IllegalArgumentException(INVALID_ORIENTATION + orientation);
     }
   }
 
@@ -276,7 +321,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
         verticalUnit = info;
         break;
       default:
-        throw new IllegalArgumentException("Invalid orientation: " + orientation);
+        throw new IllegalArgumentException(INVALID_ORIENTATION + orientation);
     }
   }
 
