@@ -1,9 +1,6 @@
 package net.ghielmetti.utilities;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Compares two strings taking care of the contained numbers in a human way.<br>
@@ -13,60 +10,69 @@ import java.util.regex.Pattern;
  * @author lghi
  */
 public class NaturalComparator implements Comparator<String> {
-  private Pattern splitter = Pattern.compile("(\\d+|\\D+)");
-
   @Override
   public int compare(String inString1, String inString2) {
-    // We split each string as runs of number/non-number strings
-    ArrayList<String> array1 = split(inString1);
-    ArrayList<String> array2 = split(inString2);
-    int index = 0;
-    String part1 = "";
-    String part2 = "";
-    int size = Math.min(array1.size(), array2.size());
+    int len1 = inString1.length();
+    int len2 = inString2.length();
+    int i1 = 0;
+    int i2 = 0;
 
-    // Compare beginning of string
-    for (; index < size; index++) {
-      part1 = array1.get(index);
-      part2 = array2.get(index);
+    while (i1 < len1 && i2 < len2) {
+      char c1 = inString1.charAt(i1);
+      char c2 = inString2.charAt(i2);
 
-      if (!part1.equals(part2)) {
-        // Try to convert the different run of characters to number
-        try {
-          // Here, the strings differ on a number
-          return Integer.compare(Integer.parseInt(part1), Integer.parseInt(part2));
-        } catch (@SuppressWarnings("unused") NumberFormatException e) {
-          // Strings differ on a non-number
-          return inString1.compareTo(inString2);
+      if (Character.isDigit(c1) && Character.isDigit(c2)) {
+        // If we found digits on both strings it means that until here, the other characters are equals elsewhere the
+        // routine has already returned.
+        int end1 = i1;
+        int end2 = i2;
+
+        // Searches for the last digit in the String1
+        while (end1 < len1 && Character.isDigit(inString1.charAt(end1))) {
+          end1++;
         }
+
+        // Searches for the last digit in the String2
+        while (end2 < len2 && Character.isDigit(inString2.charAt(end2))) {
+          end2++;
+        }
+
+        // Skips leading zeros in string1
+        while (end1 - i1 > end2 - i2) {
+          if (inString1.charAt(i1) == '0') {
+            i1++;
+          } else {
+            return 1;
+          }
+        }
+
+        // Skips leading zeros in the string2
+        while (end1 - i1 < end2 - i2) {
+          if (inString2.charAt(i2) == '0') {
+            i2++;
+          } else {
+            return -1;
+          }
+        }
+
+        // Here the numeric part is equally long, we can just compare it character by character
+        for (; i1 < end1; i1++, i2++) {
+          int c = Character.compare(inString1.charAt(i1), inString2.charAt(i2));
+
+          if (c != 0) {
+            return c;
+          }
+        }
+      } else if (c1 != c2) {
+        // Two different characters, we exit immediately with the correct order.
+        return Character.compare(c1, c2);
+      } else {
+        i1++;
+        i2++;
       }
     }
 
-    // No differences and the sizes are the same
-    if (array1.size() == array2.size()) {
-      return 0; // Same strings!
-    }
-
-    // The longest string is after the shortest
-    return Integer.compare(array1.size(), array2.size());
-  }
-
-  /**
-   * Splits a string between numbers parts and not numbers part.
-   *
-   * @param inString
-   *          The string to split
-   * @return An array with the string split on all parts.
-   */
-  private ArrayList<String> split(String inString) {
-    ArrayList<String> r = new ArrayList<>();
-    Matcher matcher = splitter.matcher(inString);
-
-    while (matcher.find()) {
-      String m = matcher.group(1);
-      r.add(m);
-    }
-
-    return r;
+    // if all is equal, shorter is lesser
+    return Integer.compare(len1, len2);
   }
 }
