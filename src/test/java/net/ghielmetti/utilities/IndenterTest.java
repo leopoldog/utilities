@@ -116,7 +116,7 @@ public class IndenterTest {
         + "stmt1;\n" //
         + "stmt2;\n" //
         + "                    stmt3;stmt4;\n" //
-        + "               stmt5;\n", i.toString());
+        + "               stmt5;", i.toString());
   }
 
   @Test

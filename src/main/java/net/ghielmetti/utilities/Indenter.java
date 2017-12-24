@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import org.apache.commons.lang3.tuple.MutablePair;
 
 public class Indenter implements Appendable {
+  private static final String                             NULL    = "null";
   private final Deque<MutablePair<String, StringBuilder>> lines   = new LinkedList<>();
   private final String                                    step;
   private boolean                                         newLine;
@@ -63,14 +64,18 @@ public class Indenter implements Appendable {
   }
 
   public <T extends Indentable> Indenter append(final Collection<T> inList, final boolean inNewLine) {
-    String separator = "";
-    for (T ad : inList) {
-      if (inNewLine) {
-        ad.appendTo(append(separator).checkNewLine()).requestNewLine();
-      } else {
-        ad.appendTo(append(separator));
+    if (inList == null) {
+      append(NULL);
+    } else {
+      String separator = "";
+      for (T ad : inList) {
+        if (inNewLine) {
+          ad.appendTo(append(separator).checkNewLine()).requestNewLine();
+        } else {
+          ad.appendTo(append(separator));
+        }
+        separator = ", ";
       }
-      separator = ", ";
     }
     return this;
   }
@@ -88,7 +93,11 @@ public class Indenter implements Appendable {
   }
 
   public Indenter append(final Indentable inIndentable) {
-    inIndentable.appendTo(this);
+    if (inIndentable == null) {
+      append(NULL);
+    } else {
+      inIndentable.appendTo(this);
+    }
     return this;
   }
 
@@ -133,14 +142,18 @@ public class Indenter implements Appendable {
   }
 
   public <T extends Indentable> Indenter append(final T[] inList, final boolean inNewLine) {
-    String separator = "";
-    for (T ad : inList) {
-      if (inNewLine) {
-        ad.appendTo(append(separator).checkNewLine()).requestNewLine();
-      } else {
-        ad.appendTo(append(separator));
+    if (inList == null) {
+      append(NULL);
+    } else {
+      String separator = "";
+      for (T ad : inList) {
+        if (inNewLine) {
+          ad.appendTo(append(separator).checkNewLine()).requestNewLine();
+        } else {
+          ad.appendTo(append(separator));
+        }
+        separator = ", ";
       }
-      separator = ", ";
     }
     return this;
   }
@@ -213,19 +226,22 @@ public class Indenter implements Appendable {
   @Override
   public String toString() {
     StringBuilder out = new StringBuilder();
-    boolean eol = true;
+    boolean eol = false;
 
     for (MutablePair<String, StringBuilder> line : lines) {
+      if (eol) {
+        out.append("\n");
+        eol = false;
+      }
+
       StringBuilder l = trim(line.getRight());
+
       if (l.length() > 0) {
         if (line.getLeft() != null) {
           out.append(line.getLeft());
         }
+
         out.append(l);
-        eol = false;
-      }
-      if (!eol) {
-        out.append("\n");
         eol = true;
       }
     }
