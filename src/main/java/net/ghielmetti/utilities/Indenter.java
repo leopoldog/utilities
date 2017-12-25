@@ -60,10 +60,14 @@ public class Indenter implements Appendable {
   }
 
   public <T extends Indentable> Indenter append(final Collection<T> inList) {
-    return append(inList, false);
+    return append(inList, ", ", false);
   }
 
-  public <T extends Indentable> Indenter append(final Collection<T> inList, final boolean inNewLine) {
+  public <T extends Indentable> Indenter append(final Collection<T> inList, final String inSeparator) {
+    return append(inList, inSeparator, false);
+  }
+
+  public <T extends Indentable> Indenter append(final Collection<T> inList, final String inSeparator, final boolean inNewLine) {
     if (inList == null) {
       append(NULL);
     } else {
@@ -74,7 +78,7 @@ public class Indenter implements Appendable {
         } else {
           ad.appendTo(append(separator));
         }
-        separator = ", ";
+        separator = inSeparator;
       }
     }
     return this;
@@ -138,10 +142,14 @@ public class Indenter implements Appendable {
   }
 
   public <T extends Indentable> Indenter append(final T[] inList) {
-    return append(inList, false);
+    return append(inList, ", ", false);
   }
 
-  public <T extends Indentable> Indenter append(final T[] inList, final boolean inNewLine) {
+  public <T extends Indentable> Indenter append(final T[] inList, final String inSeparator) {
+    return append(inList, inSeparator, false);
+  }
+
+  public <T extends Indentable> Indenter append(final T[] inList, final String inSeparator, final boolean inNewLine) {
     if (inList == null) {
       append(NULL);
     } else {
@@ -152,7 +160,7 @@ public class Indenter implements Appendable {
         } else {
           ad.appendTo(append(separator));
         }
-        separator = ", ";
+        separator = inSeparator;
       }
     }
     return this;
