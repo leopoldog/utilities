@@ -1,6 +1,5 @@
 package net.ghielmetti.utilities;
 
-import java.util.Collection;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -59,31 +58,6 @@ public class Indenter implements Appendable {
     return this;
   }
 
-  public <T extends Indentable> Indenter append(final Collection<T> inList) {
-    return append(inList, ", ", false);
-  }
-
-  public <T extends Indentable> Indenter append(final Collection<T> inList, final String inSeparator) {
-    return append(inList, inSeparator, false);
-  }
-
-  public <T extends Indentable> Indenter append(final Collection<T> inList, final String inSeparator, final boolean inNewLine) {
-    if (inList == null) {
-      append(NULL);
-    } else {
-      String separator = "";
-      for (T ad : inList) {
-        if (inNewLine) {
-          ad.appendTo(append(separator).checkNewLine()).requestNewLine();
-        } else {
-          ad.appendTo(append(separator));
-        }
-        separator = inSeparator;
-      }
-    }
-    return this;
-  }
-
   public Indenter append(final double inNumber) {
     lines.peekLast().getRight().append(inNumber);
     checkAmount();
@@ -108,6 +82,31 @@ public class Indenter implements Appendable {
   public Indenter append(final int inNumber) {
     lines.peekLast().getRight().append(inNumber);
     checkAmount();
+    return this;
+  }
+
+  public <T extends Indentable> Indenter append(final Iterable<T> inList) {
+    return append(inList, ", ", false);
+  }
+
+  public <T extends Indentable> Indenter append(final Iterable<T> inList, final String inSeparator) {
+    return append(inList, inSeparator, false);
+  }
+
+  public <T extends Indentable> Indenter append(final Iterable<T> inList, final String inSeparator, final boolean inNewLine) {
+    if (inList == null) {
+      append(NULL);
+    } else {
+      String separator = "";
+      for (T ad : inList) {
+        if (inNewLine) {
+          ad.appendTo(append(separator).checkNewLine()).requestNewLine();
+        } else {
+          ad.appendTo(append(separator));
+        }
+        separator = inSeparator;
+      }
+    }
     return this;
   }
 
