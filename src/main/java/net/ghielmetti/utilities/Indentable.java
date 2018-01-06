@@ -5,5 +5,5 @@ public interface Indentable {
 
   int getPriority();
 
-  void setPriority(int inPriority);
+  // void setPriority(int inPriority);
 }

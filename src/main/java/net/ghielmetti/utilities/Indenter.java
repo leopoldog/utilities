@@ -1,5 +1,6 @@
 package net.ghielmetti.utilities;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -93,38 +94,27 @@ public class Indenter implements Appendable {
     return this;
   }
 
-  public <T extends Indentable> Indenter append(final Iterable<T> inList) {
-    return append(inList, null, ", ", false);
-  }
-
-  public <T extends Indentable> Indenter append(final Iterable<T> inList, final Integer inPriority) {
-    return append(inList, inPriority, ", ", false);
-  }
-
-  public <T extends Indentable> Indenter append(final Iterable<T> inList, final Integer inPriority, final String inSeparator) {
-    return append(inList, inPriority, inSeparator, false);
-  }
-
-  public <T extends Indentable> Indenter append(final Iterable<T> inList, final Integer inPriority, final String inSeparator, final boolean inNewLine) {
+  public <T> Indenter append(final Iterable<T> inList, final Integer inPriority, final String inSeparator, final boolean inNewLine) {
     if (inList == null) {
-      append(NULL);
-    } else {
-      String separator = "";
-      for (T ad : inList) {
-        append(separator);
-        if (inNewLine) {
-          checkNewLine();
-        }
-        if (inPriority != null && inPriority.intValue() < ad.getPriority()) {
-          ad.appendTo(append("(")).append(")");
+      return append(NULL);
+    }
+    String separator = "";
+    String sep = inSeparator == null ? "" : inSeparator;
+    for (T ad : inList) {
+      append(separator).checkNewLine();
+      if (ad instanceof Indentable) {
+        if (inPriority != null && inPriority.intValue() < ((Indentable) ad).getPriority()) {
+          ((Indentable) ad).appendTo(append("(")).append(")");
         } else {
-          ad.appendTo(this);
+          ((Indentable) ad).appendTo(this);
         }
-        if (inNewLine) {
-          requestNewLine();
-        }
-        separator = inSeparator;
+      } else {
+        append(ad);
       }
+      if (inNewLine) {
+        requestNewLine();
+      }
+      separator = sep;
     }
     return this;
   }
@@ -159,40 +149,8 @@ public class Indenter implements Appendable {
     return this;
   }
 
-  public <T extends Indentable> Indenter append(final T[] inList) {
-    return append(inList, null, ", ", false);
-  }
-
-  public <T extends Indentable> Indenter append(final T[] inList, final Integer inPriority) {
-    return append(inList, inPriority, ", ", false);
-  }
-
-  public <T extends Indentable> Indenter append(final T[] inList, final Integer inPriority, final String inSeparator) {
-    return append(inList, inPriority, inSeparator, false);
-  }
-
-  public <T extends Indentable> Indenter append(final T[] inList, final Integer inPriority, final String inSeparator, final boolean inNewLine) {
-    if (inList == null) {
-      append(NULL);
-    } else {
-      String separator = "";
-      for (T ad : inList) {
-        append(separator);
-        if (inNewLine) {
-          checkNewLine();
-        }
-        if (inPriority != null && inPriority.intValue() < ad.getPriority()) {
-          ad.appendTo(append("(")).append(")");
-        } else {
-          ad.appendTo(this);
-        }
-        if (inNewLine) {
-          requestNewLine();
-        }
-        separator = inSeparator;
-      }
-    }
-    return this;
+  public <T> Indenter append(final T[] inList, final Integer inPriority, final String inSeparator, final boolean inNewLine) {
+    return append(Arrays.asList(inList), inPriority, inSeparator, inNewLine);
   }
 
   public Indenter appendCodePoint(final int inCodePoint) {
