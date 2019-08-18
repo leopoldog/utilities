@@ -8,8 +8,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -18,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * @author lghi
  */
 public class VersionReader {
-  private Map<ImmutablePair<String, String>, ImmutablePair<String, Long>> infos = new HashMap<>();
+  private Map<Pair<String, String>, Pair<String, Long>> infos = new HashMap<>();
 
   /**
    * Constructor.<br>
@@ -34,8 +33,8 @@ public class VersionReader {
           String version = p.getProperty("version");
           String groupId = p.getProperty("groupId");
           String artifactId = p.getProperty("artifactId");
-          ImmutablePair<String, String> id = ImmutablePair.of(groupId, artifactId);
-          ImmutablePair<String, Long> info = ImmutablePair.of(version, Long.valueOf(entry.getTime()));
+          Pair<String, String> id = Pair.of(groupId, artifactId);
+          Pair<String, Long> info = Pair.of(version, Long.valueOf(entry.getTime()));
           infos.put(id, info);
         } catch (Exception e) {
           LoggerFactory.getLogger(VersionReader.class).warn("Unable to read {}", entry, e);
@@ -49,7 +48,7 @@ public class VersionReader {
    *
    * @return A set of packages.
    */
-  public Set<ImmutablePair<String, String>> getPackages() {
+  public Set<Pair<String, String>> getPackages() {
     return Collections.unmodifiableSet(infos.keySet());
   }
 
@@ -59,9 +58,9 @@ public class VersionReader {
    * @param inPackage The package
    * @return The time of the package.
    */
-  public Long getTime(final ImmutablePair<String, String> inPackage) {
-    ImmutablePair<String, Long> info = infos.get(inPackage);
-    return info == null ? null : info.right;
+  public Long getTime(final Pair<String, String> inPackage) {
+    Pair<String, Long> info = infos.get(inPackage);
+    return info == null ? null : info.getRight();
   }
 
   /**
@@ -70,9 +69,9 @@ public class VersionReader {
    * @param inPackage The package
    * @return The version description.
    */
-  public String getVersion(final ImmutablePair<String, String> inPackage) {
-    ImmutablePair<String, Long> info = infos.get(inPackage);
-    return info == null ? null : info.left;
+  public String getVersion(final Pair<String, String> inPackage) {
+    Pair<String, Long> info = infos.get(inPackage);
+    return info == null ? null : info.getLeft();
   }
 
   @Override
