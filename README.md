@@ -1,2 +1,2 @@
 # utilities
-Some utilities classes in Java
+Some utility classes in Java
