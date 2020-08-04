@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="true">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="textArea1logback" class="net.ghielmetti.utilities.logback.JTextAreaAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="textArea2logback" class="net.ghielmetti.utilities.logback.JTextAreaAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <logger name="LogTextArea2logback">
+    <appender-ref ref="textArea2logback" />
+  </logger>
+  <root level="debug">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="textArea1logback" />
+  </root>
+</configuration>

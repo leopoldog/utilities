@@ -10,7 +10,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
-import net.ghielmetti.utilities.log4j.JTextAreaAppender;
+import net.ghielmetti.utilities.logback.JTextAreaAppender;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +21,18 @@ import org.slf4j.LoggerFactory;
  *
  * @author Leopoldo Ghielmetti
  */
-public class JTextAreaAppenderTest extends JFrame {
+public class JTextAreaAppenderLogbackTest extends JFrame {
   /** Tests {@link JTextAreaAppender}. */
   @Test
+  // This test is ignored because it conflicts with the Log4j Appender,
+  // test it manually after commenting the log4j in the pom file.
+  @Ignore
   public void testOK() {
     setLayout(new GridBagLayout());
     Logger textArea1 = LoggerFactory.getLogger("");
-    Logger textArea2 = LoggerFactory.getLogger("LogTextArea2");
-    JTextAreaPanel panel1 = JTextAreaAppender.getTextAreaPanel("textArea1");
-    JTextAreaPanel panel2 = JTextAreaAppender.getTextAreaPanel("textArea2");
+    Logger textArea2 = LoggerFactory.getLogger("LogTextArea2logback");
+    JTextAreaPanel panel1 = JTextAreaAppender.getTextAreaPanel("textArea1logback");
+    JTextAreaPanel panel2 = JTextAreaAppender.getTextAreaPanel("textArea2logback");
     add(panel1, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
     add(panel2, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
     setPreferredSize(new Dimension(400, 800));
