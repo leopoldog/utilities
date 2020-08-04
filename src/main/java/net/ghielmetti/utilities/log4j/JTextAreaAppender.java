@@ -8,6 +8,7 @@ import org.apache.log4j.Appender;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Layout;
 import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
@@ -38,15 +39,15 @@ public class JTextAreaAppender extends AppenderSkeleton {
     JTextAreaAppender appender = searchAppender(inName, LogManager.getRootLogger());
 
     if (appender == null) {
-      for (Enumeration<?> loggers = org.apache.log4j.LogManager.getCurrentLoggers(); appender == null && loggers.hasMoreElements();) {
-        appender = searchAppender(inName, (org.apache.log4j.Logger)loggers.nextElement());
+      for (Enumeration<?> loggers = LogManager.getCurrentLoggers(); appender == null && loggers.hasMoreElements();) {
+        appender = searchAppender(inName, (Logger)loggers.nextElement());
       }
     }
 
     return appender;
   }
 
-  private static JTextAreaAppender searchAppender(final String inName, final org.apache.log4j.Logger inLogger) {
+  private static JTextAreaAppender searchAppender(final String inName, final Logger inLogger) {
     for (Enumeration<?> appenders = inLogger.getAllAppenders(); appenders.hasMoreElements();) {
       Appender appender = (Appender)appenders.nextElement();
 
