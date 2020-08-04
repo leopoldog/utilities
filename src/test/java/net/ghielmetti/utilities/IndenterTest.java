@@ -23,8 +23,12 @@ public class IndenterTest {
     i.append(4.0D).forceNewLine();
     i.append("5").forceNewLine();
     i.append('6').forceNewLine();
-    i.append(new char[]{'7'}).forceNewLine();
-    i.append(new char[]{'7', '8', '9'}, 1, 1).forceNewLine();
+    i.append(new char[] {
+        '7'
+    }).forceNewLine();
+    i.append(new char[] {
+        '7', '8', '9'
+    }, 1, 1).forceNewLine();
     i.append(Integer.valueOf(9)).forceNewLine();
     i.append(new StringBuffer("10")).forceNewLine();
     i.append(new StringBuilder("11")).forceNewLine();
@@ -46,7 +50,8 @@ public class IndenterTest {
         + "11\n" //
         + "12\n" //
         + "13\n" //
-        + "Ӓ\n", i.toString());
+        + "Ӓ\n", //
+        i.toString());
   }
 
   @Test
@@ -71,7 +76,8 @@ public class IndenterTest {
         + "  stmt1;\n" //
         + "  stmt2;\n" //
         + "}\n" //
-        + "stmt3;\n", i.toString());
+        + "stmt3;\n", //
+        i.toString());
   }
 
   @Test
@@ -91,7 +97,8 @@ public class IndenterTest {
         + "for x in 0..100\n" //
         + "  stmt1;\n" //
         + "  stmt2;\n" //
-        + "stmt3;\n", i.toString());
+        + "stmt3;\n", //
+        i.toString());
   }
 
   @Test
@@ -116,7 +123,64 @@ public class IndenterTest {
         + "stmt1;\n" //
         + "stmt2;\n" //
         + "                    stmt3;stmt4;\n" //
-        + "               stmt5;", i.toString());
+        + "               stmt5;", //
+        i.toString());
+  }
+
+  @Test
+  public void test4() {
+    Indenter i = new Indenter(2);
+
+    Indentable in1 = new Indentable() {
+      @Override
+      public Indenter appendTo(final Indenter inIndenter) {
+        return inIndenter.append("in1").requestNewLine();
+      }
+
+      @Override
+      public int getPriority() {
+        return 3;
+      }
+    };
+
+    Indentable in2 = new Indentable() {
+      @Override
+      public Indenter appendTo(final Indenter inIndenter) {
+        return inIndenter.append("in2").requestNewLine();
+      }
+
+      @Override
+      public int getPriority() {
+        return 2;
+      }
+    };
+
+    Object[] list = new Object[] {
+        "a", null, "b", in1, "c", in2, "d"
+    };
+
+    i.checkNewLine().append("var1 = ").push().set().append(list, Integer.MAX_VALUE, "/", false).append(";").pop().requestNewLine();
+    i.checkNewLine().append(in1).checkNewLine().append((Indentable)null).forceNewLine().append(in2, 1).forceNewLine().append(in2, 2).forceNewLine().append(in2, 3).requestNewLine();
+    i.checkNewLine().append((Iterable<?>)null, Integer.MAX_VALUE, "-", false).requestNewLine();
+    i.checkNewLine().append("var2 = ").push().set().append(list, 2, "/", true).append(";").pop().forceNewLine();
+
+    assertEquals("var1 = a/null/b/in1/\n" //
+        + "       c/in2/\n" //
+        + "       d;\n" //
+        + "in1\n" //
+        + "null\n" //
+        + "(in2)\n" //
+        + "in2\n" //
+        + "in2\n" //
+        + "null\n" //
+        + "var2 = a/\n" //
+        + "       null/\n" //
+        + "       b/\n" //
+        + "       (in1)/\n" //
+        + "       c/\n" //
+        + "       in2/\n" //
+        + "       d;\n", //
+        i.toString());
   }
 
   @Test

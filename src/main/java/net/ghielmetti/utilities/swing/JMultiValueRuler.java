@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
@@ -125,12 +124,12 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
     width = Math.max(width, drawIntervalsTicksAndValues(inGraphics, clipBounds, fm));
 
     if (dimension == null) {
-      dimension = new Dimension((int) width + insets.left + insets.right, 20);
+      dimension = new Dimension((int)width + insets.left + insets.right, 20);
     } else {
-      dimension.setSize((int) width + insets.left + insets.right, 20);
+      dimension.setSize((int)width + insets.left + insets.right, 20);
     }
 
-    if ((int) getPreferredSize().getWidth() != (int) dimension.getWidth()) {
+    if ((int)getPreferredSize().getWidth() != (int)dimension.getWidth()) {
       setPreferredSize(dimension);
       setMinimumSize(dimension);
     }
@@ -159,9 +158,9 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
 
     if (minimum.doubleValue() < maximum.doubleValue()) {
       double size = Math.log10(maximum.doubleValue() - minimum.doubleValue());
-      baseSizeLarge = (int) Math.pow(10, (int) size);
-      baseSizeMedium = (int) Math.pow(10, (int) (size - 0.5));
-      baseSizeSmall = (int) Math.pow(10, (int) (size - 1.5));
+      baseSizeLarge = (int)Math.pow(10, (int)size);
+      baseSizeMedium = (int)Math.pow(10, (int)(size - 0.5));
+      baseSizeSmall = (int)Math.pow(10, (int)(size - 1.5));
 
       if (baseSizeMedium == baseSizeLarge) {
         baseSizeMedium /= 2;
@@ -183,8 +182,8 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
         T min = getBoundedValue(interval.getMinimum());
         T max = getBoundedValue(interval.getMaximum());
         double factor = getFactor(inClipBounds, inFontMetric);
-        int from = (int) ((min.doubleValue() - minimum.doubleValue()) * factor);
-        int to = (int) ((max.doubleValue() - minimum.doubleValue()) * factor);
+        int from = (int)((min.doubleValue() - minimum.doubleValue()) * factor);
+        int to = (int)((max.doubleValue() - minimum.doubleValue()) * factor);
 
         inGraphics.setColor(interval.getBackground());
         inGraphics.fillRect(inClipBounds.x + 3, inClipBounds.y + inClipBounds.height - to - inFontMetric.getHeight() / 2, 3, to - from);
@@ -230,7 +229,7 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
       double factor = getFactor(inClipBounds, inFontMetric);
       double val = (inValue - minimum.doubleValue()) * factor;
       int lineHalfHeight = inLineHeigth / 2;
-      int posY = (int) (inClipBounds.y + inClipBounds.height - topMargin - val) + lineHalfHeight;
+      int posY = (int)(inClipBounds.y + inClipBounds.height - topMargin - val) + lineHalfHeight;
 
       width = Math.abs(inLineWidth) * TICK_UNIT;
       int sub = Math.max(-inLineWidth * TICK_UNIT, 0);
@@ -249,12 +248,16 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
           inGraphics.fillRect(textXPos, posY - topMargin, inClipBounds.width - textX, inFontMetric.getHeight());
 
           if (inWithArrow) {
-            int[] px = new int[]{inClipBounds.x + RULER_LINE, //
+            int[] px = new int[] {
+                inClipBounds.x + RULER_LINE, //
                 textXPos, //
-                textXPos};
-            int[] py = new int[]{posY, //
+                textXPos
+            };
+            int[] py = new int[] {
+                posY, //
                 posY - altezza, //
-                posY + altezza};
+                posY + altezza
+            };
             inGraphics.fillPolygon(px, py, 3);
           }
         }
@@ -277,7 +280,7 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
 
       inGraphics.drawLine(inClipBounds.x + RULER_LINE, inClipBounds.y + topMargin, inClipBounds.x + RULER_LINE, inClipBounds.y + inClipBounds.height - inFontMetric.getHeight() + topMargin);
 
-      for (int i = (int) (minimum.doubleValue() / size[0]) * size[0]; i <= maximum.doubleValue(); i += size[0]) {
+      for (int i = (int)(minimum.doubleValue() / size[0]) * size[0]; i <= maximum.doubleValue(); i += size[0]) {
         int lineWidth;
         String label = null;
 
@@ -340,6 +343,8 @@ public class JMultiValueRuler<T extends Number> extends JPanel {
       mul = !mul;
     }
 
-    return new int[]{sizeSmall, sizeMedium, sizeLarge};
+    return new int[] {
+        sizeSmall, sizeMedium, sizeLarge
+    };
   }
 }

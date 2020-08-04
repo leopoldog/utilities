@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +47,7 @@ public class Translations {
     try {
       return new MessageFormat(labels.getString(inKey)).format(inArguments);
     } catch (MissingResourceException e) {
-      LOGGER.warn("Translation not found for message {}", inKey, e);
+      LOGGER.warn("Translation not found for message {}", inKey);
       return inKey;
     }
   }

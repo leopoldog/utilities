@@ -24,8 +24,7 @@ public class NaturalComparatorTest {
       for (int j = 0; j < list.size(); j++) {
         String si = list.get(i);
         String sj = list.get(j);
-        assertEquals("The strings \"" + si + "\" and \"" + sj + "\" are incorrectly ordered", (int)Math.signum(Integer.compare(i, j)),
-            (int)Math.signum(inc.compare(si, sj)));
+        assertEquals("The strings \"" + si + "\" and \"" + sj + "\" are incorrectly ordered", (int)Math.signum(Integer.compare(i, j)), (int)Math.signum(inc.compare(si, sj)));
       }
     }
   }

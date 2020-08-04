@@ -3,7 +3,6 @@ package net.ghielmetti.utilities.swing;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -11,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
-
 import net.ghielmetti.utilities.log4j.JTextAreaAppender;
 
 /**
@@ -98,10 +96,10 @@ public class JTextAreaPanel extends JPanel {
    */
   private synchronized void setCaretPolicy(final boolean inAutoUpdate) {
     if (inAutoUpdate) {
-      ((DefaultCaret) textArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+      ((DefaultCaret)textArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
       textArea.setCaretPosition(textArea.getDocument().getLength());
     } else {
-      ((DefaultCaret) textArea.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+      ((DefaultCaret)textArea.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
     }
   }
 

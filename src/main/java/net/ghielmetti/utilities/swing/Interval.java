@@ -2,7 +2,6 @@ package net.ghielmetti.utilities.swing;
 
 import java.awt.Color;
 import java.util.Objects;
-
 import javax.swing.JComponent;
 
 /**

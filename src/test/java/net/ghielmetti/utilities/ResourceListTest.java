@@ -7,7 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.regex.Pattern;
-
+import net.ghielmetti.utilities.VersionReader.ResourceEntry;
+import net.ghielmetti.utilities.VersionReader.ResourceList;
 import org.junit.Test;
 
 /**
@@ -17,7 +18,7 @@ import org.junit.Test;
  */
 public class ResourceListTest {
   /**
-   * Tests {@link Translations} constructor inaccessible.
+   * Tests {@link ResourceList} constructor inaccessible.
    *
    * @throws Exception Not expected.
    */
@@ -30,7 +31,7 @@ public class ResourceListTest {
 
     // For coverage only, we call the constructor!
     constructors[0].setAccessible(true);
-    constructors[0].newInstance((Object[]) null);
+    constructors[0].newInstance((Object[])null);
   }
 
   /** Tests {@link ResourceList#getResources(Pattern)}. */

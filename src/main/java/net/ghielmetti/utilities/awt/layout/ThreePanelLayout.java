@@ -20,9 +20,9 @@ public class ThreePanelLayout implements LayoutManager {
   /** Identifies the East panel */
   public static final String EAST   = "East";
 
-  private Component          _westComponent;
-  private Component          _centerComponent;
-  private Component          _eastComponent;
+  private Component _westComponent;
+  private Component _centerComponent;
+  private Component _eastComponent;
 
   @Override
   public void addLayoutComponent(final String inName, final Component inComp) {

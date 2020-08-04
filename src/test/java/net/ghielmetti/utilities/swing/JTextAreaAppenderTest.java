@@ -6,17 +6,14 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
-
+import net.ghielmetti.utilities.log4j.JTextAreaAppender;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.ghielmetti.utilities.log4j.JTextAreaAppender;
 
 /**
  * Tests for {@link JTextAreaAppender}
@@ -51,14 +48,14 @@ public class JTextAreaAppenderTest extends JFrame {
     JTextArea textAreaComponent2 = panel2.getTextArea();
     JCheckBox autoCheck2 = panel2.getAutoCheckBox();
 
-    assertEquals(DefaultCaret.ALWAYS_UPDATE, ((DefaultCaret) textAreaComponent1.getCaret()).getUpdatePolicy());
-    assertEquals(DefaultCaret.ALWAYS_UPDATE, ((DefaultCaret) textAreaComponent2.getCaret()).getUpdatePolicy());
+    assertEquals(DefaultCaret.ALWAYS_UPDATE, ((DefaultCaret)textAreaComponent1.getCaret()).getUpdatePolicy());
+    assertEquals(DefaultCaret.ALWAYS_UPDATE, ((DefaultCaret)textAreaComponent2.getCaret()).getUpdatePolicy());
     autoCheck2.doClick();
     Thread.yield();
-    assertEquals(DefaultCaret.NEVER_UPDATE, ((DefaultCaret) textAreaComponent2.getCaret()).getUpdatePolicy());
+    assertEquals(DefaultCaret.NEVER_UPDATE, ((DefaultCaret)textAreaComponent2.getCaret()).getUpdatePolicy());
     int firstPartTextLength = textAreaComponent1.getText().length();
-    assertEquals(firstPartTextLength, ((DefaultCaret) textAreaComponent1.getCaret()).getDot());
-    assertEquals(0, ((DefaultCaret) textAreaComponent2.getCaret()).getDot());
+    assertEquals(firstPartTextLength, ((DefaultCaret)textAreaComponent1.getCaret()).getDot());
+    assertEquals(0, ((DefaultCaret)textAreaComponent2.getCaret()).getDot());
 
     for (int i = 100; i < 200; i++) {
       textArea2.debug("A message: {}", Integer.valueOf(i));
@@ -66,19 +63,19 @@ public class JTextAreaAppenderTest extends JFrame {
 
     Thread.yield();
     int allTextLength = textAreaComponent1.getText().length();
-    assertEquals(allTextLength, ((DefaultCaret) textAreaComponent1.getCaret()).getDot());
-    assertEquals(0, ((DefaultCaret) textAreaComponent2.getCaret()).getDot());
+    assertEquals(allTextLength, ((DefaultCaret)textAreaComponent1.getCaret()).getDot());
+    assertEquals(0, ((DefaultCaret)textAreaComponent2.getCaret()).getDot());
 
     autoCheck2.setSelected(true);
     Thread.yield();
-    assertEquals(textAreaComponent1.getText().length(), ((DefaultCaret) textAreaComponent1.getCaret()).getDot());
-    assertEquals(textAreaComponent2.getText().length(), ((DefaultCaret) textAreaComponent2.getCaret()).getDot());
+    assertEquals(textAreaComponent1.getText().length(), ((DefaultCaret)textAreaComponent1.getCaret()).getDot());
+    assertEquals(textAreaComponent2.getText().length(), ((DefaultCaret)textAreaComponent2.getCaret()).getDot());
 
     panel1.getClearButton().doClick();
     Thread.yield();
-    assertEquals(0, ((DefaultCaret) textAreaComponent1.getCaret()).getDot());
+    assertEquals(0, ((DefaultCaret)textAreaComponent1.getCaret()).getDot());
     panel2.getClearButton().doClick();
     Thread.yield();
-    assertEquals(0, ((DefaultCaret) textAreaComponent2.getCaret()).getDot());
+    assertEquals(0, ((DefaultCaret)textAreaComponent2.getCaret()).getDot());
   }
 }

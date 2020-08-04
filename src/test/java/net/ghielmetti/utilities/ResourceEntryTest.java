@@ -5,21 +5,15 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.Path;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
-import java.nio.file.spi.FileSystemProvider;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
-
+import net.ghielmetti.utilities.VersionReader.ResourceEntry;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,13 +31,13 @@ public class ResourceEntryTest {
   /** Tests {@link ResourceEntry#ResourceEntry(File)}. */
   @Test(expected = NullPointerException.class)
   public void constructor_nullFile_throwsAnException() {
-    assertNull(new ResourceEntry((File) null));
+    assertNull(new ResourceEntry((File)null));
   }
 
   /** Tests {@link ResourceEntry#ResourceEntry(JarEntry)}. */
   @Test(expected = NullPointerException.class)
   public void constructor_nullJarEntry_throwsAnException() {
-    assertNull(new ResourceEntry((JarEntry) null));
+    assertNull(new ResourceEntry((JarEntry)null));
   }
 
   /** Tests {@link ResourceEntry#getAttributes()}. */
@@ -128,22 +122,14 @@ public class ResourceEntryTest {
    */
   @Test
   public void getTime_onAFileResource_returnTheFileTime() throws Exception {
-    @SuppressWarnings("resource")
-    FileSystem fileSystem = mock(FileSystem.class);
-    FileSystemProvider provider = mock(FileSystemProvider.class);
-    BasicFileAttributes attr = mock(BasicFileAttributes.class);
-    Path path = mock(Path.class);
-    when(provider.readAttributes(eq(path), eq(BasicFileAttributes.class))).thenReturn(attr);
-    when(fileSystem.provider()).thenReturn(provider);
-    when(file.toPath()).thenReturn(path);
-    when(path.getFileSystem()).thenReturn(fileSystem);
-    when(attr.lastModifiedTime()).thenReturn(FileTime.fromMillis(1234L));
+    when(Long.valueOf(file.lastModified())).thenReturn(Long.valueOf(1234L));
     assertEquals(1234L, fileResource.getTime());
   }
 
   /** Tests {@link ResourceEntry#getTime()}. */
   @Test
   public void getTime_onAFileResourceWithAnException_returnMinusOne() {
+    doThrow(new SecurityException("TEST")).when(file).lastModified();
     assertEquals(-1, fileResource.getTime());
   }
 

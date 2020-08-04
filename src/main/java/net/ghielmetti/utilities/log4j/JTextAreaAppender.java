@@ -1,17 +1,14 @@
 package net.ghielmetti.utilities.log4j;
 
 import java.util.Enumeration;
-
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
-
+import net.ghielmetti.utilities.swing.JTextAreaPanel;
 import org.apache.log4j.Appender;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Layout;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.spi.LoggingEvent;
-
-import net.ghielmetti.utilities.swing.JTextAreaPanel;
 
 /**
  * A TextArea that is updated via the Log4j utility.<br>
@@ -42,7 +39,7 @@ public class JTextAreaAppender extends AppenderSkeleton {
 
     if (appender == null) {
       for (Enumeration<?> loggers = org.apache.log4j.LogManager.getCurrentLoggers(); appender == null && loggers.hasMoreElements();) {
-        appender = searchAppender(inName, (org.apache.log4j.Logger) loggers.nextElement());
+        appender = searchAppender(inName, (org.apache.log4j.Logger)loggers.nextElement());
       }
     }
 
@@ -51,10 +48,10 @@ public class JTextAreaAppender extends AppenderSkeleton {
 
   private static JTextAreaAppender searchAppender(final String inName, final org.apache.log4j.Logger inLogger) {
     for (Enumeration<?> appenders = inLogger.getAllAppenders(); appenders.hasMoreElements();) {
-      Appender appender = (Appender) appenders.nextElement();
+      Appender appender = (Appender)appenders.nextElement();
 
       if (appender instanceof JTextAreaAppender && appender.getName().equals(inName)) {
-        return (JTextAreaAppender) appender;
+        return (JTextAreaAppender)appender;
       }
     }
 

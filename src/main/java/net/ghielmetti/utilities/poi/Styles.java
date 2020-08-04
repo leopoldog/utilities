@@ -2,7 +2,6 @@ package net.ghielmetti.utilities.poi;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
@@ -364,15 +363,15 @@ public class Styles {
   private void setRotation(final CellStyle inCellStyle, final char inRotation) {
     switch (inRotation) {
       case '1': // 90°
-        inCellStyle.setRotation((short) 90);
+        inCellStyle.setRotation((short)90);
         break;
 
       case '2': // 180°
-        inCellStyle.setRotation((short) 180);
+        inCellStyle.setRotation((short)180);
         break;
 
       case '3': // 270°
-        inCellStyle.setRotation((short) -90);
+        inCellStyle.setRotation((short)-90);
         break;
 
       case '0': // 0°

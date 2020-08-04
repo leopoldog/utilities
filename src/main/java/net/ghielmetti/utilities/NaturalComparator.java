@@ -11,7 +11,7 @@ import java.util.Comparator;
  */
 public class NaturalComparator implements Comparator<String> {
   @Override
-  public int compare(String inString1, String inString2) {
+  public int compare(final String inString1, final String inString2) {
     int len1 = inString1.length();
     int len2 = inString2.length();
     int i1 = 0;

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 
 import java.lang.reflect.Constructor;
 import java.util.Locale;
-
 import org.junit.Test;
 
 /**
@@ -28,7 +27,7 @@ public class TranslationsTest {
 
     // For coverage only, we call the constructor!
     constructors[0].setAccessible(true);
-    constructors[0].newInstance((Object[]) null);
+    constructors[0].newInstance((Object[])null);
   }
 
   /** Tests {@link Translations#translate(String, Object...)}. */

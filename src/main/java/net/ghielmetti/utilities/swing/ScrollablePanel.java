@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
-
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
@@ -100,12 +99,12 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
   private static final String INVALID_ORIENTATION = "Invalid orientation: ";
   private static final long   serialVersionUID    = 5045389161307904568L;
 
-  private ScrollableSizeHint  scrollableHeight    = ScrollableSizeHint.NONE;
-  private ScrollableSizeHint  scrollableWidth     = ScrollableSizeHint.NONE;
-  private IncrementInfo       horizontalBlock;
-  private IncrementInfo       horizontalUnit;
-  private IncrementInfo       verticalBlock;
-  private IncrementInfo       verticalUnit;
+  private ScrollableSizeHint scrollableHeight = ScrollableSizeHint.NONE;
+  private ScrollableSizeHint scrollableWidth  = ScrollableSizeHint.NONE;
+  private IncrementInfo      horizontalBlock;
+  private IncrementInfo      horizontalUnit;
+  private IncrementInfo      verticalBlock;
+  private IncrementInfo      verticalUnit;
 
   /**
    * Default constructor that uses a FlowLayout
@@ -195,7 +194,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
     // STRETCH sizing, use the greater of the panel or viewport height
 
     if (getParent() instanceof JViewport) {
-      return ((JViewport) getParent()).getHeight() > getPreferredSize().height;
+      return ((JViewport)getParent()).getHeight() > getPreferredSize().height;
     }
 
     return false;
@@ -214,7 +213,7 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
     // STRETCH sizing, use the greater of the panel or viewport width
 
     if (getParent() instanceof JViewport) {
-      return ((JViewport) getParent()).getWidth() > getPreferredSize().width;
+      return ((JViewport)getParent()).getWidth() > getPreferredSize().width;
     }
 
     return false;

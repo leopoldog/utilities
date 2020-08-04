@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -47,7 +46,7 @@ public class JComboBoxDecorator {
     inComboBox.setModel(new DefaultComboBoxModel<>(inEntries.toArray(new String[inEntries.size()])));
     inComboBox.setSelectedItem(null);
 
-    final JTextField textField = (JTextField) inComboBox.getEditor().getEditorComponent();
+    final JTextField textField = (JTextField)inComboBox.getEditor().getEditorComponent();
 
     textField.addKeyListener(new KeyAdapter() {
       @Override

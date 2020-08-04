@@ -13,8 +13,8 @@ public class Pair<Left, Right> {
   private static final int PRIME = 31;
 
   // The two pair values
-  private final Left       left;
-  private final Right      right;
+  private final Left  left;
+  private final Right right;
 
   /**
    * Create a new object pair. You must specify a "left" and a "right" object.
@@ -41,7 +41,7 @@ public class Pair<Left, Right> {
       return false;
     }
 
-    Pair<?, ?> other = (Pair<?, ?>) obj;
+    Pair<?, ?> other = (Pair<?, ?>)obj;
 
     if (left == null) {
       if (other.left != null) {

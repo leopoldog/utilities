@@ -7,10 +7,8 @@ import static org.mockito.Mockito.when;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import org.junit.Test;
 
 /**

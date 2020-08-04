@@ -3,7 +3,6 @@ package net.ghielmetti.utilities.swing;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-
 import javax.swing.JComboBox;
 
 /**
@@ -42,7 +41,7 @@ public class Scroller implements MouseWheelListener {
   }
 
   private void scrollComboBox(final MouseWheelEvent inMouseWeelEvent) {
-    JComboBox<?> combo = (JComboBox<?>) inMouseWeelEvent.getSource();
+    JComboBox<?> combo = (JComboBox<?>)inMouseWeelEvent.getSource();
     int index = combo.getSelectedIndex() + inMouseWeelEvent.getWheelRotation();
 
     if (index >= 0 && index < combo.getItemCount()) {
@@ -51,7 +50,7 @@ public class Scroller implements MouseWheelListener {
   }
 
   private void scrollNumber(final MouseWheelEvent inMouseWeelEvent) {
-    JNumberField field = (JNumberField) inMouseWeelEvent.getSource();
+    JNumberField field = (JNumberField)inMouseWeelEvent.getSource();
     int ctrl = (inMouseWeelEvent.getModifiersEx() & InputEvent.CTRL_DOWN_MASK) != 0 ? 100 : 1;
     int shift = (inMouseWeelEvent.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) != 0 ? 10 : 1;
     long value = field.getNumber().longValue() + inMouseWeelEvent.getWheelRotation() * ctrl * shift;

@@ -8,9 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Date;
-
 import javax.swing.InputVerifier;
-
 import org.junit.Test;
 
 /**
@@ -112,7 +110,7 @@ public class JNumberFieldTest {
 
     field0.setText(1);
     assertEquals(1, field0.getNumber().intValue());
-    field0.setText((String) null);
+    field0.setText((String)null);
     assertEquals(0, field0.getNumber().intValue());
     field1.setText(1);
     assertEquals(1, field1.getNumber().intValue());
@@ -120,7 +118,7 @@ public class JNumberFieldTest {
     assertEquals(0, field1.getNumber().intValue());
     field2.setText(-1);
     assertEquals(-1, field2.getNumber().intValue());
-    field2.setText((Number) null);
+    field2.setText((Number)null);
     assertEquals(0, field2.getNumber().intValue());
     field3.setText(12345);
     assertEquals(12345, field3.getNumber().intValue());
@@ -159,5 +157,6 @@ public class JNumberFieldTest {
     field6.getFocusListeners()[2].focusGained(null);
     field6.getFocusListeners()[2].focusLost(null);
     assertEquals("12345.6789", field6.getSelectedText());
+    assertFalse(field6.isAllowedCharacter((char)0));
   }
 }

@@ -6,15 +6,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
-
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-
+import net.ghielmetti.utilities.swing.text.JMaxLengthDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.ghielmetti.utilities.swing.text.JMaxLengthDocument;
 
 /**
  * Description : number field derived from {@link JTextField}.
@@ -358,7 +355,7 @@ public class JNumberField extends JTextField {
   boolean isAllowedCharacter(final char inCharacter) {
     // Disallow special characters
     if (Character.isIdentifierIgnorable(inCharacter)) {
-      return true;
+      return false;
     }
 
     // All the numeric and "+" characters are allowed

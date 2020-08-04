@@ -3,11 +3,9 @@ package net.ghielmetti.utilities;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import org.junit.Test;
-
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.javase.QRCode;
+import org.junit.Test;
 
 /**
  * Test the QR-Code generator.<br>
@@ -21,7 +19,6 @@ public class QRCodeTest {
    *
    * @throws IOException Not expected
    */
-  @SuppressWarnings("static-method")
   @Test
   public void testQRCode() throws IOException {
     try (FileOutputStream f = new FileOutputStream("/tmp/testQR.jpg")) {

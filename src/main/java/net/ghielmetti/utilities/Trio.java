@@ -14,9 +14,9 @@ public class Trio<Left, Center, Right> {
   private static final int PRIME = 31;
 
   // The three values
-  private final Left       left;
-  private final Center     center;
-  private final Right      right;
+  private final Left   left;
+  private final Center center;
+  private final Right  right;
 
   /**
    * Create a new object. You must specify a "left", a "center" and a "right" object.
@@ -45,7 +45,7 @@ public class Trio<Left, Center, Right> {
       return false;
     }
 
-    Trio<?, ?, ?> other = (Trio<?, ?, ?>) obj;
+    Trio<?, ?, ?> other = (Trio<?, ?, ?>)obj;
 
     if (center == null) {
       if (other.center != null) {
