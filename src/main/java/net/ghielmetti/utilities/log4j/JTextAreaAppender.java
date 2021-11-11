@@ -69,6 +69,15 @@ public class JTextAreaAppender extends AppenderSkeleton {
     return true;
   }
 
+  /**
+   * Sets the max size of the text contained in this logger.
+   *
+   * @param inMaxSize The max size.
+   */
+  public void setMaxSize(final int inMaxSize) {
+    panel.setMaxSize(inMaxSize);
+  }
+
   @Override
   protected void append(final LoggingEvent inEvent) {
     if (checkEntryConditions()) {

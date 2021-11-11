@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 import net.ghielmetti.utilities.log4j.JTextAreaAppender;
 
@@ -18,9 +19,10 @@ import net.ghielmetti.utilities.log4j.JTextAreaAppender;
  * @author Leopoldo Ghielmetti
  */
 public class JTextAreaPanel extends JPanel {
-  private JTextArea textArea;
   private JCheckBox auto;
   private JButton   clear;
+  private int       maxSize = 10000;
+  private JTextArea textArea;
 
   /** Constructor. */
   public JTextAreaPanel() {
@@ -35,6 +37,14 @@ public class JTextAreaPanel extends JPanel {
    */
   public synchronized void append(final String inMessage) {
     textArea.append(inMessage);
+
+    try {
+      while (textArea.getDocument().getLength() > maxSize) {
+        textArea.replaceRange("", 0, textArea.getLineEndOffset(0));
+      }
+    } catch (BadLocationException e) {
+      // Silently ignore
+    }
 
     if (auto.isSelected()) {
       textArea.setCaretPosition(textArea.getDocument().getLength());
@@ -68,6 +78,15 @@ public class JTextAreaPanel extends JPanel {
    */
   public void setAuto(final boolean inAuto) {
     auto.setSelected(inAuto);
+  }
+
+  /**
+   * Sets the max size of the text contained in this panel.
+   *
+   * @param inMaxSize The max size.
+   */
+  public void setMaxSize(final int inMaxSize) {
+    maxSize = inMaxSize;
   }
 
   private void initialize() {

@@ -90,6 +90,15 @@ public class JTextAreaAppender<E> extends AppenderBase<E> {
     encoder = lwe;
   }
 
+  /**
+   * Sets the max size of the text contained in this logger.
+   *
+   * @param inMaxSize The max size.
+   */
+  public void setMaxSize(final int inMaxSize) {
+    panel.setMaxSize(inMaxSize);
+  }
+
   @Override
   protected void append(final E inEvent) {
     if (checkEntryConditions()) {
