@@ -13,7 +13,6 @@ import org.junit.Test;
  * @author Leopoldo Ghielmetti
  */
 @Deprecated
-@SuppressWarnings("deprecation")
 public class TrioTest {
   /** Tests {@link Trio#Trio(Object, Object, Object)}. */
   @Test
@@ -119,6 +118,7 @@ public class TrioTest {
   }
 
   /** Tests {@link Trio#equals(Object)}. */
+  @SuppressWarnings("unlikely-arg-type")
   @Test
   public void equals_unrelatedObject_returnsFalse() {
     assertFalse(new Trio<>("1", "2", "3").equals(""));

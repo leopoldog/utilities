@@ -13,7 +13,6 @@ import org.junit.Test;
  * @author Leopoldo Ghielmetti
  */
 @Deprecated
-@SuppressWarnings("deprecation")
 public class PairTest {
   /** Tests {@link Pair#Pair(Object, Object)}. */
   @Test
@@ -95,6 +94,7 @@ public class PairTest {
   }
 
   /** Tests {@link Pair#equals(Object)}. */
+  @SuppressWarnings("unlikely-arg-type")
   @Test
   public void equals_unrelatedObject_returnsFalse() {
     assertFalse(new Pair<>("1", "2").equals(""));
