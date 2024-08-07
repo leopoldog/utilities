@@ -1,5 +1,6 @@
 package net.ghielmetti.utilities;
 
+import java.text.Collator;
 import java.util.Comparator;
 
 /**
@@ -10,6 +11,22 @@ import java.util.Comparator;
  * @author lghi
  */
 public class NaturalComparator implements Comparator<String> {
+  private Collator _collator = Collator.getInstance();
+
+  /** Constructor that uses the {@link Collator#CANONICAL_DECOMPOSITION} strength. */
+  public NaturalComparator() {
+    _collator.setStrength(Collator.CANONICAL_DECOMPOSITION);
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param inStrength One of the {@link Collator} strength values.
+   */
+  public NaturalComparator(final int inStrength) {
+    _collator.setStrength(inStrength);
+  }
+
   @Override
   public int compare(final String inString1, final String inString2) {
     int len1 = inString1.length();
@@ -39,20 +56,18 @@ public class NaturalComparator implements Comparator<String> {
 
         // Skips leading zeros in string1
         while (end1 - i1 > end2 - i2) {
-          if (inString1.charAt(i1) == '0') {
-            i1++;
-          } else {
+          if (inString1.charAt(i1) != '0') {
             return 1;
           }
+          i1++;
         }
 
         // Skips leading zeros in the string2
         while (end1 - i1 < end2 - i2) {
-          if (inString2.charAt(i2) == '0') {
-            i2++;
-          } else {
+          if (inString2.charAt(i2) != '0') {
             return -1;
           }
+          i2++;
         }
 
         // Here the numeric part is equally long, we can just compare it character by character
@@ -63,10 +78,16 @@ public class NaturalComparator implements Comparator<String> {
             return c;
           }
         }
-      } else if (c1 != c2) {
-        // Two different characters, we exit immediately with the correct order.
-        return Character.compare(c1, c2);
       } else {
+        if (c1 != c2) {
+          // Two different characters, we exit immediately with the correct order.
+          int c = _collator.compare(String.valueOf(c1), String.valueOf(c2));
+
+          if (c != 0) {
+            return c;
+          }
+        }
+
         i1++;
         i2++;
       }
